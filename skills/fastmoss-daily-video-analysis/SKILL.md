@@ -131,13 +131,15 @@ Review at least the highest-ranked 30 candidates after deterministic scoring. Fo
 - buyer pain or purchase hesitation;
 - product reveal and proof action;
 - CTA and readable endpoint;
+- the actual source-video structure, using the video's own duration and observed sequence rather than forcing a 15-second template;
+- the complete source-video spoken voiceover or transcript when audio/transcript evidence is available, plus Chinese translation. For US videos store English + Chinese; for DE videos store German + Chinese;
 - format, camera, edit rhythm, setting, and creator performance;
 - elements that are reusable versus identity-, claim-, or copyright-bound;
 - evidence confidence and the reason for any limitation.
 
-When TikTok is unreadable, continue with FastMoss-visible metrics, thumbnail, caption, transcript, product, and creator data. Mark the teardown `limited_evidence`; do not invent unseen actions or dialogue.
+When TikTok is unreadable, continue with FastMoss-visible metrics, thumbnail, caption, transcript, product, and creator data. Mark the teardown `limited_evidence`; do not invent unseen actions or dialogue. If the complete source voiceover cannot be extracted from FastMoss transcript/caption fields, TikTok-accessible transcript/audio, or another exact source-video evidence path, reject the row from a full production report unless a shortage is explicitly reported.
 
-Enrich the Top 30 fields for each store pool, rerun the script, then inspect the final per-store 14 and combined 56 selections. Keep one video focused on one buying pain plus one visible proof action. Match the buying reason, not merely the same garment type.
+Enrich the Top 30 fields for each store pool, rerun the script, then inspect the final per-store 14 and combined 56 selections. Keep one video focused on one buying pain plus one visible proof action. Match the buying reason and source-video structure to a similar, shootable SKU, not merely the same garment type. A final selected video must have one corresponding store-isolated SKU whose style, product type, wearing occasion, visible proof action, and buyer problem are similar enough to be replicated.
 
 ## Build Store Battle Cards
 
@@ -146,11 +148,11 @@ Every final recommendation must contain:
 - source URL, creator, publish time, and evidence tier;
 - creator follower count, source URL, as-of date, and `verified_small` status when the run uses a creator-size gate;
 - previous-day viral evidence and score breakdown;
-- matched SKU and product-fit reason;
+- one matched similar SKU that can replicate the viral video's product idea, plus the product-fit reason and any limits of similarity;
 - non-copyable elements and risk notes;
-- 15-second structure: `0-2s pain`, `2-5s result/reveal`, `5-10s proof action`, `10-15s purchase reason and CTA`;
+- source-video structure copied from the actual viral video: use its real duration, timecoded beats, scene/action order, hook, proof, purchase reason, and CTA. Do not replace it with a generic 15-second structure;
 - concrete shot, actor, prop, garment, and proof-action requirements;
-- market-language voiceover plus Chinese review translation;
+- complete source-video voiceover/transcript in the market language plus Chinese translation. For US output, include English + Chinese; for Germany, include German + Chinese. Preserve the full spoken content rather than summarizing it;
 - cover copy, caption, and exactly five hashtags when publish copy is included;
 - `#Imily Bela` as one of those five apparel hashtags.
 
@@ -164,7 +166,8 @@ For user-facing Excel and HTML reports, optimize for shoot planning rather than 
 - Add a local video first-frame or video-cover image for every selected video when a public TikTok oEmbed `thumbnail_url` or FastMoss-visible video thumbnail is available. Save images under the run folder and reference them locally from the HTML. If video-frame acquisition fails, use the FastMoss product cover only as a labeled fallback and record the fallback in the run manifest, not as a visible column.
 - User-facing Excel and HTML tables must not show these operational/audit columns: TikTok product link, FastMoss product link, evidence/risk-limit notes, creator follower evidence date, creator-size status, creator profile source, creator profile source URL, rejection reason, or internal match-basis fields.
 - Keep those hidden fields in normalized CSV/JSON, failure logs, and `run-manifest.json` when needed for validation. Hiding them from the presentation layer must not remove the evidence used to qualify small-account rows or diagnose failures.
-- Keep visible report fields focused on: first-frame image, store, market, selection group, rank, video sales, GMV, views, creator handle, follower count, content angle, product title, price, buyer pain, proof action, 15-second structure, market voiceover, Chinese review translation, cover copy, hashtags, and source video link.
+- Keep visible report fields focused on: first-frame image, store, market, selection group, rank, video sales, GMV, views, creator handle, follower count, content angle, matched similar SKU, product title, price, buyer pain, proof action, actual source-video structure, complete source voiceover/transcript, Chinese translation, cover copy, hashtags, and source video link.
+- In visual HTML reports, put the actual source-video structure and full bilingual voiceover/transcript inside each video card, with enough layout space for scanning. Do not hide these fields behind audit files or replace them with a generic shooting template.
 
 ## Enforce Diversity
 
@@ -175,6 +178,7 @@ Select each store's 14 rows as a portfolio:
 - sort each store's small-account seven by `sales` descending after applying `creator_followers < 50000`;
 - cover at least four content angles per store when the candidate pool supports them;
 - use no more than two recommendations for one SKU unless the report explicitly justifies an exception;
+- require every selected source video to map to one similar, currently eligible SKU that can reproduce the viral video's core product promise and proof action;
 - avoid repeated hooks, proof actions, creators, and source videos;
 - exclude large creators and unverified creator-size evidence when the requested strategy is for a small account;
 - keep top-sales versus small-account overlap at one video or fewer per store;
@@ -189,6 +193,7 @@ Mark the run `passed` only when all applicable gates pass:
 - core-field missingness is at most 20 percent;
 - at least 60 percent of the reviewed Top 30 are worth decomposing;
 - every final recommendation binds to a concrete SKU;
+- every final recommendation has one similar, shootable SKU match whose product type, visible style, buyer pain, and proof action are close enough for replication;
 - every final recommendation uses the requested market and store catalog row and has positive available stock in that store's matching pool;
 - every small-account recommendation satisfies `creator_followers < 50000` with exact-handle evidence;
 - each store has seven highest-sales rows and seven small-account rows, unless a shortage is explicitly reported;
@@ -197,7 +202,7 @@ Mark the run `passed` only when all applicable gates pass:
 - pairwise source-video overlap between stores is at or below 20 percent;
 - the inventory snapshot is no more than one market day older than the analysis date;
 - each store's selected rows cover at least four distinct content angles when the pool supports them;
-- every selected battle card has a hook, buyer pain, visible proof action, CTA, market-language voiceover, Chinese translation, cover copy, and exactly five hashtags including `#Imily Bela`;
+- every selected battle card has a hook, buyer pain, visible proof action, CTA, actual source-video structure, complete market-language source voiceover/transcript, Chinese translation, cover copy, and exactly five hashtags including `#Imily Bela`;
 - every claim has visible evidence or is explicitly labeled unverified;
 - rerunning the same inputs produces the same ranked IDs and no duplicate report rows;
 - the chosen acquisition tier and every fallback are recorded.

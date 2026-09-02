@@ -47,13 +47,13 @@ Required for a qualified candidate. `store_id` may come from the run configurati
 
 Useful enrichment fields:
 
-`caption`, `transcript`, `thumbnail_url`, `duration_sec`, `view_growth`, `sales_growth`, `hook`, `pain_point`, `proof_action`, `cta`, `content_angle`, `risk_note`, `evidence_status`, `voiceover`, `voiceover_zh`, `cover_copy`, and `hashtags`.
+`caption`, `transcript`, `thumbnail_url`, `duration_sec`, `view_growth`, `sales_growth`, `hook`, `pain_point`, `proof_action`, `cta`, `content_angle`, `source_video_structure`, `source_voiceover_full`, `source_voiceover_zh`, `voiceover_source`, `risk_note`, `evidence_status`, `cover_copy`, and `hashtags`.
 
 For official video-product exports, preserve product aggregates as `product_total_sales`, `product_total_gmv`, `product_total_views`, and `product_total_likes`. Do not alias these fields to video-level `sales`, `gmv`, `views`, or `likes`. Store non-official timestamp derivations in `published_at_basis` and set `evidence_status=limited_evidence`.
 
-For user-facing Excel and HTML reports, keep operational evidence fields out of the visible table even when they are required internally. Hide TikTok product links, FastMoss product links, evidence/risk notes, creator-size status, creator follower evidence date, creator profile source/source URL, rejection reasons, and match-basis fields from presentation outputs. Preserve them in normalized CSV/JSON, failure logs, and `run-manifest.json` for auditability.
+For user-facing Excel and HTML reports, keep operational evidence fields out of the visible table even when they are required internally. Hide TikTok product links, FastMoss product links, evidence/risk notes, creator-size status, creator follower evidence date, creator profile source/source URL, rejection reasons, and match-basis fields from presentation outputs. Preserve them in normalized CSV/JSON, failure logs, and `run-manifest.json` for auditability. Do not hide `source_video_structure`, `source_voiceover_full`, or `source_voiceover_zh`; these are user-facing shoot-planning fields.
 
-When a visual report is requested, add `video_first_frame_path` or `video_cover_path` to the presentation dataset. Prefer TikTok oEmbed or FastMoss-visible video thumbnails; use product cover images only as a recorded fallback.
+When a visual report is requested, add `video_first_frame_path` or `video_cover_path` to the presentation dataset. Prefer TikTok oEmbed or FastMoss-visible video thumbnails; use product cover images only as a recorded fallback. Each visual card must also carry the matched similar SKU, actual source-video structure, complete source-video voiceover/transcript in the market language, and Chinese translation.
 
 Core-field missingness is measured across `video_id or video_url`, `creator_name`, `published_at`, `market`, `product_title`, `views`, and at least one of `sales or gmv`.
 
@@ -65,11 +65,11 @@ Required creator-size fields are `creator_name`, `creator_followers`, `creator_f
 
 ## Product Fields
 
-Every final row needs `sku`, `title`, `market`, and enough product evidence to justify a match. Prefer these fields:
+Every final row needs `sku`, `title`, `market`, and enough product evidence to justify a similar, shootable match for the source viral video. Prefer these fields:
 
 `category`, `product_type`, `pain_points`, `selling_points`, `proof_actions`, `fit`, `colors`, `neckline`, `sleeve`, `fabric`, `scenarios`, `price`, `stock`, `margin`, `prohibited_claims`, and `image_paths`.
 
-Unknown stock, margin, price, or prohibited wording lowers commercial readiness. Never fabricate these values from a product image.
+Unknown stock, margin, price, or prohibited wording lowers commercial readiness. Never fabricate these values from a product image. A product cannot be selected merely because it is in the same broad category; it must be similar enough in style, occasion, buyer problem, and proof-action capability to reproduce the viral video's core selling idea.
 
 ## Number Parsing
 
@@ -106,6 +106,8 @@ Score the buying reason rather than only garment-name similarity:
 
 Reject a match when prohibited wording conflicts with the source concept or when the needed visible proof cannot be demonstrated by the SKU.
 
+Also reject a match when the SKU is only a broad category neighbor and cannot plausibly reproduce the source video's visible style, wearing occasion, buyer pain, or proof action.
+
 ## Final Score
 
 Use this deterministic pre-ranking before semantic review:
@@ -116,9 +118,10 @@ Replicability considers usable hook/proof/CTA evidence, practical duration and s
 
 ## Selection Constraints
 
-- Require a concrete SKU for final selection.
+- Require one concrete, similar, currently eligible SKU for every final source video selection.
 - For each store, select seven highest-sales qualified videos, ranked by `sales` descending and then GMV.
 - For each store, select seven small-account highest-sales videos after requiring exact-handle creator-size evidence and `creator_followers < 50000`.
+- Require `source_video_structure`, `source_voiceover_full`, and `source_voiceover_zh` for every final production recommendation. If the complete voiceover/transcript cannot be obtained, reject the row unless the report explicitly documents a shortage.
 - Keep overlap between a store's two seven-video groups to at most one source video.
 - Keep pairwise overlap between any two stores to at most 20 percent of selected source videos.
 - Prefer no more than two rows per SKU and two per creator.

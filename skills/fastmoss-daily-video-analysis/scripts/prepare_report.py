@@ -63,10 +63,14 @@ CANDIDATE_ALIASES = {
     "proof_action": ["proof_action", "proof", "证明动作", "验证动作"],
     "cta": ["cta", "行动号召", "购买引导"],
     "content_angle": ["content_angle", "angle", "内容角度", "视频角度"],
+    "source_video_structure": ["source_video_structure", "actual_video_structure", "video_structure", "source_structure", "原视频结构", "爆款视频结构", "实际视频结构"],
+    "source_voiceover_full": ["source_voiceover_full", "full_voiceover", "source_transcript", "完整口播", "原视频口播", "原视频完整口播"],
+    "source_voiceover_zh": ["source_voiceover_zh", "full_voiceover_zh", "source_voiceover_translation_zh", "原视频口播中文", "完整口播中文", "中文翻译"],
+    "voiceover_source": ["voiceover_source", "transcript_source", "口播来源"],
     "risk_note": ["risk_note", "risk", "风险", "风险提示"],
     "evidence_status": ["evidence_status", "证据状态"],
     "voiceover": ["voiceover", "market_voiceover", "市场口播"],
-    "voiceover_zh": ["voiceover_zh", "中文翻译", "口播中文"],
+    "voiceover_zh": ["voiceover_zh", "口播中文"],
     "cover_copy": ["cover_copy", "封面文案"],
     "hashtags": ["hashtags", "标签"],
 }
@@ -975,14 +979,18 @@ def replication_package_complete(row: dict[str, Any]) -> bool:
     product = row.get("_product") or {}
     pain = clean_text(row.get("pain_point") or product.get("pain_points"))
     proof = clean_text(row.get("proof_action") or product.get("proof_actions"))
+    source_structure = clean_text(row.get("source_video_structure"))
+    source_voiceover = clean_text(row.get("source_voiceover_full") or row.get("voiceover") or row.get("transcript"))
+    source_voiceover_zh = clean_text(row.get("source_voiceover_zh") or row.get("voiceover_zh"))
     hashtags = parse_hashtags(row.get("hashtags"))
     return all([
         clean_text(row.get("hook")),
         pain,
         proof,
         clean_text(row.get("cta")),
-        clean_text(row.get("voiceover")),
-        clean_text(row.get("voiceover_zh")),
+        source_structure,
+        source_voiceover,
+        source_voiceover_zh,
         clean_text(row.get("cover_copy")),
         len(hashtags) == 5,
         "#Imily Bela" in hashtags,
@@ -1045,8 +1053,9 @@ def report_markdown(manifest: dict[str, Any], selected: list[dict[str, Any]], wa
     lines.extend(["", "## Replication Battle Cards", ""])
     for index, row in enumerate(selected, 1):
         product = row.get("_product") or {}
-        voiceover = row.get("voiceover") or "[semantic review required]"
-        voiceover_zh = row.get("voiceover_zh") or "[需完成中文审核翻译]"
+        source_structure = row.get("source_video_structure") or "[actual source-video structure required]"
+        source_voiceover = row.get("source_voiceover_full") or row.get("voiceover") or row.get("transcript") or "[complete source-video voiceover required]"
+        source_voiceover_zh = row.get("source_voiceover_zh") or row.get("voiceover_zh") or "[需完成完整口播中文翻译]"
         hashtags = row.get("hashtags") or "[exactly five hashtags required; include #Imily Bela]"
         lines.extend([
             f"### {index}. {md(row.get('matched_sku'))} - {md(row.get('matched_product'))}",
@@ -1056,15 +1065,12 @@ def report_markdown(manifest: dict[str, Any], selected: list[dict[str, Any]], wa
             f"- Creator followers: {md(row.get('creator_followers'))}",
             f"- Evidence: {md(row.get('source_tier'))}; {md(row.get('evidence_status'))}; confidence {row['evidence_confidence']:.1f}",
             f"- Why viral: hot {row['hot_score']:.1f}; views {md(row.get('views'))}; sales {md(row.get('sales'))}; GMV {md(row.get('gmv'))}",
-            f"- SKU match: {row['product_match_score']:.1f}; {'; '.join(row.get('match_reasons') or [])}",
+            f"- Similar replicable SKU: {md(row.get('matched_sku'))}; match {row['product_match_score']:.1f}; {'; '.join(row.get('match_reasons') or [])}",
             f"- Buyer pain: {md(row.get('pain_point') or product.get('pain_points'))}",
             f"- Visible proof: {md(row.get('proof_action') or product.get('proof_actions'))}",
-            f"- 0-2s: {md(row.get('hook') or row.get('pain_point') or product.get('pain_points'))}",
-            f"- 2-5s: reveal {md(row.get('matched_product'))} on body or in the target scenario",
-            f"- 5-10s: demonstrate {md(row.get('proof_action') or product.get('proof_actions'))}",
-            f"- 10-15s: {md(row.get('cta') or 'state the purchase reason and point to the product link')}",
-            f"- Market voiceover: {md(voiceover)}",
-            f"- Chinese review translation: {md(voiceover_zh)}",
+            f"- Actual source-video structure: {md(source_structure)}",
+            f"- Full source voiceover/transcript: {md(source_voiceover)}",
+            f"- Chinese translation: {md(source_voiceover_zh)}",
             f"- Cover copy: {md(row.get('cover_copy'))}",
             f"- Hashtags: {md(hashtags)}",
             "",

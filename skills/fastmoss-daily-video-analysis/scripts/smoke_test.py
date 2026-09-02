@@ -67,8 +67,8 @@ def build_candidates(path: Path) -> None:
         "视频ID", "视频链接", "达人", "发布时间", "市场", "类目", "商品ID", "商品名称",
         "价格", "播放量", "点赞数", "评论数", "分享数", "销量", "GMV", "播放增长",
         "销量增长", "视频时长", "视频文案", "转录", "采集方式", "采集时间", "开头钩子",
-        "购买痛点", "证明动作", "CTA", "内容角度", "证据状态", "市场口播", "中文翻译",
-        "封面文案", "标签",
+        "购买痛点", "证明动作", "CTA", "内容角度", "原视频结构", "原视频完整口播",
+        "原视频口播中文", "口播来源", "证据状态", "市场口播", "口播中文", "封面文案", "标签",
     ]
     workbook = Workbook()
     sheet = workbook.active
@@ -104,6 +104,10 @@ def build_candidates(path: Path) -> None:
             "side turn and fabric pinch",
             "I linked it below.",
             ANGLES[index % len(ANGLES)],
+            "0-2s points to stomach cling; 2-6s side turn; 6-11s fabric pinch and release; 11-15s mirror full-body outfit and lower-left link CTA.",
+            "If your tee clings here, watch the side turn. This drape is why I kept it. Linked below.",
+            "如果你的T恤总贴这里，看这个侧身展示。这个垂坠感就是我留下它的原因，链接在下方。",
+            "synthetic transcript fixture",
             "available",
             "If your tee clings here, watch the side turn. This drape is why I kept it. Linked below.",
             "如果你的T恤总贴肚子，看这个侧身展示。这个垂坠感就是我留下它的原因，链接在下方。",
