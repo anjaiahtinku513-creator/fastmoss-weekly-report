@@ -924,17 +924,26 @@ def select_diverse(
     sku_counts: Counter[str] = Counter()
     creator_counts: Counter[str] = Counter()
 
-    def can_add(row: dict[str, Any]) -> bool:
+    def can_add(row: dict[str, Any], *, unique_sku_only: bool = False) -> bool:
+        if unique_sku_only and sku_counts[row["matched_sku"]]:
+            return False
         return sku_counts[row["matched_sku"]] < max_per_sku and creator_counts[row.get("creator_name") or "unknown"] < max_per_creator
 
     for angle in dict.fromkeys(row["content_angle"] for row in eligible):
         if len({item["content_angle"] for item in selected}) >= 4 or len(selected) >= top:
             break
-        candidate = next((row for row in eligible if row["content_angle"] == angle and row not in selected and can_add(row)), None)
+        candidate = next((row for row in eligible if row["content_angle"] == angle and row not in selected and can_add(row, unique_sku_only=True)), None)
         if candidate:
             selected.append(candidate)
             sku_counts[candidate["matched_sku"]] += 1
             creator_counts[candidate.get("creator_name") or "unknown"] += 1
+    for row in eligible:
+        if len(selected) >= top:
+            break
+        if row not in selected and can_add(row, unique_sku_only=True):
+            selected.append(row)
+            sku_counts[row["matched_sku"]] += 1
+            creator_counts[row.get("creator_name") or "unknown"] += 1
     for row in eligible:
         if len(selected) >= top:
             break
@@ -943,6 +952,14 @@ def select_diverse(
             sku_counts[row["matched_sku"]] += 1
             creator_counts[row.get("creator_name") or "unknown"] += 1
     selected.sort(key=lambda row: selection_sort_key(row, rank_by))
+    final_sku_counts = Counter(row["matched_sku"] for row in selected)
+    for row in selected:
+        if final_sku_counts[row["matched_sku"]] > 1:
+            row["sku_reuse_status"] = "reused_to_fill_report"
+            row["sku_reuse_reason"] = "qualified unique-SKU candidates were exhausted before the target count was filled"
+        else:
+            row["sku_reuse_status"] = "unique"
+            row["sku_reuse_reason"] = ""
     watchlist = [row for row in ranked if row not in selected][:20]
     return selected, watchlist
 
@@ -1014,7 +1031,7 @@ def write_json(path: Path, payload: Any) -> None:
 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
-    fields = [*CANDIDATE_ALIASES.keys(), *CREATOR_OUTPUT_FIELDS, "hot_score", "product_match_score", "replicability_score", "evidence_confidence", "final_score", "matched_sku", "matched_product", "match_reasons"]
+    fields = [*CANDIDATE_ALIASES.keys(), *CREATOR_OUTPUT_FIELDS, "hot_score", "product_match_score", "replicability_score", "evidence_confidence", "final_score", "matched_sku", "matched_product", "match_reasons", "sku_reuse_status", "sku_reuse_reason"]
     with path.open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
@@ -1066,6 +1083,7 @@ def report_markdown(manifest: dict[str, Any], selected: list[dict[str, Any]], wa
             f"- Evidence: {md(row.get('source_tier'))}; {md(row.get('evidence_status'))}; confidence {row['evidence_confidence']:.1f}",
             f"- Why viral: hot {row['hot_score']:.1f}; views {md(row.get('views'))}; sales {md(row.get('sales'))}; GMV {md(row.get('gmv'))}",
             f"- Similar replicable SKU: {md(row.get('matched_sku'))}; match {row['product_match_score']:.1f}; {'; '.join(row.get('match_reasons') or [])}",
+            f"- SKU reuse: {md(row.get('sku_reuse_status') or 'unique')}{(' - ' + md(row.get('sku_reuse_reason'))) if row.get('sku_reuse_reason') else ''}",
             f"- Buyer pain: {md(row.get('pain_point') or product.get('pain_points'))}",
             f"- Visible proof: {md(row.get('proof_action') or product.get('proof_actions'))}",
             f"- Actual source-video structure: {md(source_structure)}",
@@ -1088,6 +1106,8 @@ def build_manifest(args: argparse.Namespace, candidates: list[dict[str, Any]], p
     decomposition_ready = sum(bool(row.get("caption") or row.get("transcript")) and bool(row.get("product_title")) for row in top30)
     ready_ratio = decomposition_ready / len(top30) if top30 else 0.0
     angles = len({row["content_angle"] for row in selected})
+    sku_reuse_counts = Counter(row.get("matched_sku") for row in selected if row.get("matched_sku"))
+    repeated_skus = {sku: count for sku, count in sku_reuse_counts.items() if count > 1}
     replication_ready = sum(replication_package_complete(row) for row in selected)
     creator_size_statuses = dict(Counter(row.get("creator_size_status") or "not_checked" for row in candidates))
     creator_size_verified = (
@@ -1140,6 +1160,8 @@ def build_manifest(args: argparse.Namespace, candidates: list[dict[str, Any]], p
         "core_missingness_pct": round(missingness * 100, 2),
         "top30_decomposition_ready_pct": round(ready_ratio * 100, 2),
         "content_angle_count": angles,
+        "unique_sku_count": len(sku_reuse_counts),
+        "repeated_skus": repeated_skus,
         "replication_ready_selected_count": replication_ready,
         "inventory_age_days": inventory_age_days,
         "catalog": catalog_metadata or {"catalog_mode": "legacy_single_table", "requested_market": args.market},

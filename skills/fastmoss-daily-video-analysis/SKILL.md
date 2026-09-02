@@ -177,7 +177,7 @@ Select each store's 14 rows as a portfolio:
 - sort each store's first seven by `sales` descending, using GMV as the first tiebreaker;
 - sort each store's small-account seven by `sales` descending after applying `creator_followers < 50000`;
 - cover at least four content angles per store when the candidate pool supports them;
-- use no more than two recommendations for one SKU unless the report explicitly justifies an exception;
+- minimize repeated SKUs. First attempt to select each store's 14 rows with one source video per matched SKU. Reuse a SKU only when the qualified, stock-positive, similar-SKU candidate pool cannot fill the target count, and explicitly state the repeated SKU plus the reason;
 - require every selected source video to map to one similar, currently eligible SKU that can reproduce the viral video's core product promise and proof action;
 - avoid repeated hooks, proof actions, creators, and source videos;
 - exclude large creators and unverified creator-size evidence when the requested strategy is for a small account;
@@ -194,6 +194,7 @@ Mark the run `passed` only when all applicable gates pass:
 - at least 60 percent of the reviewed Top 30 are worth decomposing;
 - every final recommendation binds to a concrete SKU;
 - every final recommendation has one similar, shootable SKU match whose product type, visible style, buyer pain, and proof action are close enough for replication;
+- repeated SKUs are minimized: zero repeats when enough qualified SKUs exist; otherwise every repeated SKU is labeled as a fill-shortage exception with the candidate-pool reason;
 - every final recommendation uses the requested market and store catalog row and has positive available stock in that store's matching pool;
 - every small-account recommendation satisfies `creator_followers < 50000` with exact-handle evidence;
 - each store has seven highest-sales rows and seven small-account rows, unless a shortage is explicitly reported;

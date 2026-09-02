@@ -124,7 +124,9 @@ Replicability considers usable hook/proof/CTA evidence, practical duration and s
 - Require `source_video_structure`, `source_voiceover_full`, and `source_voiceover_zh` for every final production recommendation. If the complete voiceover/transcript cannot be obtained, reject the row unless the report explicitly documents a shortage.
 - Keep overlap between a store's two seven-video groups to at most one source video.
 - Keep pairwise overlap between any two stores to at most 20 percent of selected source videos.
-- Prefer no more than two rows per SKU and two per creator.
+- Prefer one row per SKU. Reuse a SKU only after all eligible one-SKU-per-video options are exhausted, and label the repeated rows as `reused_to_fill_report` with a concise shortage reason.
+- Use no more than two rows per SKU unless the report explicitly documents that the qualified similar-SKU pool cannot fill the target count.
+- Prefer no more than two rows per creator.
 - Cover at least four content angles when available.
 - Do not select duplicate source IDs or URLs.
 - Keep excluded high scorers in a watchlist with the exclusion reason.
