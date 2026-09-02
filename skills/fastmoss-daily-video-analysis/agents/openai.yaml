@@ -1,0 +1,4 @@
+interface:
+  display_name: "FastMoss 每日爆款分析"
+  short_description: "按四店铺采集爆款，匹配库存 SKU 并生成 56 条复刻报告"
+  default_prompt: "使用 $fastmoss-daily-video-analysis 分析 FastMoss 昨日爆款，按三个美国店铺和一个德国店铺分别匹配有库存 SKU；每店输出 7 条销量爆款和 7 条 5 万粉以下小账号爆款。"

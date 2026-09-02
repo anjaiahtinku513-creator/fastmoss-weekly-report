@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FastMoss 每周视频复刻报告</title>
+  <meta name="description" content="FastMoss 每周美国和德国 TikTok 女装视频复刻报告归档。">
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #fff;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #e5e7eb;
+      --hot: #f72566;
+      --green: #0f9f6e;
+      --shadow: 0 10px 28px rgba(15,23,42,.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", Inter, Arial, sans-serif;
+      line-height: 1.55;
+    }
+    .shell { max-width: 1180px; margin: 0 auto; padding: 28px; }
+    header {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+    h1 { margin: 0 0 10px; font-size: 34px; letter-spacing: 0; }
+    .lead { color: var(--muted); margin: 0; max-width: 760px; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .stat {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .stat b { display: block; font-size: 24px; }
+    .latest {
+      min-height: 320px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      overflow: hidden;
+    }
+    .latest img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #111;
+      display: block;
+    }
+    .tag {
+      display: inline-block;
+      margin: 14px 0 8px;
+      color: #c01048;
+      background: #fff1f3;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 14px;
+      border-radius: 6px;
+      background: var(--ink);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .button.secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    h2 { margin: 0 0 14px; font-size: 22px; }
+    .list { display: grid; gap: 12px; }
+    .report {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+    .report img {
+      width: 120px;
+      height: 86px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #111;
+    }
+    .report h3 { margin: 0 0 4px; font-size: 18px; }
+    .report p { margin: 0; color: var(--muted); font-size: 14px; }
+    footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
+    @media (max-width: 760px) {
+      .shell { padding: 16px; }
+      header { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+      .stats { grid-template-columns: 1fr; }
+      .report { grid-template-columns: 88px 1fr; }
+      .report img { width: 88px; height: 72px; }
+      .report .button { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <section class="panel">
+        <h1>FastMoss 每周视频复刻报告</h1>
+        <p class="lead">面向 TikTok 女装运营的每周选题看板。每期报告按美国三店和德国一店整理 56 条可复刻视频，保留销量、GMV、达人、首帧图、痛点、证明动作和 15 秒拍摄结构。</p>
+        <div class="stats">
+          <div class="stat"><b id="reportCount">1</b><span>已归档周报</span></div>
+          <div class="stat"><b id="itemCount">56</b><span>最新入选视频</span></div>
+          <div class="stat"><b>4</b><span>覆盖店铺</span></div>
+        </div>
+        <div class="actions">
+          <a class="button" href="skill-packages/fastmoss-daily-video-analysis.zip">下载 Skill 安装包</a>
+          <a class="button secondary" href="skills/fastmoss-daily-video-analysis/">查看 Skill 源码</a>
+        </div>
+      </section>
+      <section class="panel latest" id="latestCard">
+        <img src="reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg" alt="最新报告视频首帧">
+        <div>
+          <span class="tag">最新周报</span>
+          <h2>2026-08-31 FastMoss 56 条报告</h2>
+          <p class="lead">无商品库匹配版，适合选题和视频复刻参考。</p>
+          <p><a class="button" href="reports/2026-08-31/">打开最新报告</a></p>
+        </div>
+      </section>
+    </header>
+    <section>
+      <h2>历史报告</h2>
+      <div class="list" id="reportList">
+        <article class="report">
+          <img src="reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg" alt="2026-08-31 报告预览">
+          <div>
+            <h3>2026-08-31 FastMoss 本周四店 56 条可复刻视频报告</h3>
+            <p>56 条视频，4 个店铺，无商品库匹配版。</p>
+          </div>
+          <a class="button" href="reports/2026-08-31/">查看</a>
+        </article>
+      </div>
+    </section>
+    <footer>仅展示公开来源报告素材。每周更新时新增日期目录并刷新 reports.json。</footer>
+  </main>
+  <script>
+    fetch('reports.json')
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => {
+        if (!data || !Array.isArray(data.reports) || data.reports.length === 0) return;
+        const reports = data.reports.slice().sort((a, b) => b.date.localeCompare(a.date));
+        const latest = reports[0];
+        document.getElementById('reportCount').textContent = reports.length;
+        document.getElementById('itemCount').textContent = latest.items || 0;
+        document.getElementById('latestCard').innerHTML = `
+          <img src="${latest.thumbnail}" alt="最新报告视频首帧">
+          <div>
+            <span class="tag">最新周报</span>
+            <h2>${latest.date} ${latest.title}</h2>
+            <p class="lead">${latest.notes || ''}</p>
+            <p><a class="button" href="${latest.path}">打开最新报告</a></p>
+          </div>`;
+        document.getElementById('reportList').innerHTML = reports.map((report) => `
+          <article class="report">
+            <img src="${report.thumbnail}" alt="${report.date} 报告预览">
+            <div>
+              <h3>${report.date} ${report.title}</h3>
+              <p>${report.items || 0} 条视频，${report.stores || 4} 个店铺。${report.notes || ''}</p>
+            </div>
+            <a class="button" href="${report.path}">查看</a>
+          </article>`).join('');
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>
