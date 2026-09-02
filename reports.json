@@ -3,12 +3,12 @@
   "reports": [
     {
       "date": "2026-08-31",
-      "title": "FastMoss 本周四店 56 条可复刻视频报告",
+      "title": "FastMoss 本周四店 56 条可复刻视频报告｜新规则版",
       "path": "reports/2026-08-31/",
       "items": 56,
       "stores": 4,
       "thumbnail": "reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg",
-      "notes": "无商品库匹配版，适合选题和视频复刻参考。"
+      "notes": "已补每条相似可复刻 SKU，SKU 不重复；本周导出缺完整原视频口播和逐秒结构，已在报告内标明待补采。"
     }
   ]
 }

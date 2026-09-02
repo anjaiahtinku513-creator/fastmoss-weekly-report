@@ -1,409 +1,63 @@
 {
-  "generated_at": "2026-09-02T16:22:01+0800",
-  "source_csv": "data.csv",
-  "html": "index.html",
-  "clean_csv": "data.csv",
+  "generated_at": "2026-09-02T23:52:00+08:00",
+  "report_date": "2026-08-31",
+  "source_tier": "official_export",
+  "rules_version": "new_rules_similar_sku_actual_structure_full_voiceover_required",
   "total_rows": 56,
-  "unique_video_ids": 56,
-  "first_frame_images": 56,
-  "tiktok_oembed_success": 52,
-  "fallback_product_cover": 4,
-  "failed_images": 0,
-  "removed_columns": [
-    "TikTok商品链接",
-    "FastMoss商品链接",
-    "证据限制",
-    "粉丝证据日期",
-    "账号状态"
+  "matched_similar_sku_rows": 56,
+  "unique_store_sku_count": 56,
+  "sku_reuse_rows": 0,
+  "complete_source_voiceover_rows": 0,
+  "actual_source_structure_rows": 0,
+  "new_rule_passed": false,
+  "new_rule_blockers": [
+    "2026-08-31 FastMoss official exports do not contain complete source-video voiceover/transcript fields.",
+    "2026-08-31 FastMoss official exports do not contain timecoded source-video structure or full visual teardown evidence.",
+    "This optimized report labels the missing evidence instead of inventing source voiceover or replacing it with a generic 15-second structure."
   ],
-  "fetch_log": [
+  "store_summaries": [
     {
-      "video_url": "https://www.tiktok.com/@ani.shop889/video/7678205266227154207",
-      "status": "ok",
-      "path": "assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg",
-      "bytes": 59963,
-      "content_type": "image/jpeg"
+      "store_id": "US_store_1",
+      "shop_name": "Tiktok美国跨境3店_US",
+      "rows": 14,
+      "unique_skus": 14,
+      "sku_reuse_rows": 0,
+      "product_table": "D:\\Codex子不语顶级运营师\\美1店铺.xlsx",
+      "eligible_stock_positive_products": 8137
     },
     {
-      "video_url": "https://www.tiktok.com/@brooke_lubyinesky/video/7677582661510090014",
-      "status": "ok",
-      "path": "assets/video-first-frames/02-US_store_1-top_sales-7677582661510090014.jpg",
-      "bytes": 182627,
-      "content_type": "image/jpeg"
+      "store_id": "US_store_2",
+      "shop_name": "Tiktok美国本土店",
+      "rows": 14,
+      "unique_skus": 14,
+      "sku_reuse_rows": 0,
+      "product_table": "D:\\Codex子不语顶级运营师\\美2店铺.xlsx",
+      "eligible_stock_positive_products": 9374
     },
     {
-      "video_url": "https://www.tiktok.com/@jenniferdean41/video/7677413076286573838",
-      "status": "ok",
-      "path": "assets/video-first-frames/03-US_store_1-top_sales-7677413076286573838.jpg",
-      "bytes": 203703,
-      "content_type": "image/jpeg"
+      "store_id": "US_store_3",
+      "shop_name": "Tiktok跨境35店_US",
+      "rows": 14,
+      "unique_skus": 14,
+      "sku_reuse_rows": 0,
+      "product_table": "D:\\Codex子不语顶级运营师\\美3店铺.xlsx",
+      "eligible_stock_positive_products": 11334
     },
     {
-      "video_url": "https://www.tiktok.com/@delanacrook/video/7677774224353774862",
-      "status": "fallback_product_cover",
-      "path": "assets/video-first-frames/04-US_store_1-top_sales-7677774224353774862-fallback-product-cover.jpg",
-      "error": "<HTTPError 403: 'Forbidden'>"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@larastiktokshop/video/7678394828958223646",
-      "status": "ok",
-      "path": "assets/video-first-frames/05-US_store_1-top_sales-7678394828958223646.jpg",
-      "bytes": 85596,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@smashleyl97/video/7677801086308175135",
-      "status": "fallback_product_cover",
-      "path": "assets/video-first-frames/06-US_store_1-top_sales-7677801086308175135-fallback-product-cover.jpg",
-      "error": "<HTTPError 403: 'Forbidden'>"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@angelacallisto123/video/7677606383188987150",
-      "status": "fallback_product_cover",
-      "path": "assets/video-first-frames/07-US_store_1-top_sales-7677606383188987150-fallback-product-cover.jpg",
-      "error": "<HTTPError 403: 'Forbidden'>"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@alysonpatterson/video/7677275211946888478",
-      "status": "ok",
-      "path": "assets/video-first-frames/08-US_store_1-small_account_sales-7677275211946888478.jpg",
-      "bytes": 145898,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@kyahflores/video/7678544973473549598",
-      "status": "ok",
-      "path": "assets/video-first-frames/09-US_store_1-small_account_sales-7678544973473549598.jpg",
-      "bytes": 179334,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@tankaneo_style/video/7677660613203610893",
-      "status": "ok",
-      "path": "assets/video-first-frames/10-US_store_1-small_account_sales-7677660613203610893.jpg",
-      "bytes": 106385,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@dancingquen01/video/7677743442381770015",
-      "status": "ok",
-      "path": "assets/video-first-frames/11-US_store_1-small_account_sales-7677743442381770015.jpg",
-      "bytes": 487637,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@myhigherelf/video/7677679662184533261",
-      "status": "ok",
-      "path": "assets/video-first-frames/12-US_store_1-small_account_sales-7677679662184533261.jpg",
-      "bytes": 190917,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@stefy_bee/video/7677721370125438239",
-      "status": "ok",
-      "path": "assets/video-first-frames/13-US_store_1-small_account_sales-7677721370125438239.jpg",
-      "bytes": 158227,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@she_is_she_will/video/7678697196912446751",
-      "status": "ok",
-      "path": "assets/video-first-frames/14-US_store_1-small_account_sales-7678697196912446751.jpg",
-      "bytes": 151280,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@shopwithgig1/video/7677390079458954509",
-      "status": "ok",
-      "path": "assets/video-first-frames/15-US_store_2-top_sales-7677390079458954509.jpg",
-      "bytes": 318233,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@simply_danae/video/7677746610910154014",
-      "status": "ok",
-      "path": "assets/video-first-frames/16-US_store_2-top_sales-7677746610910154014.jpg",
-      "bytes": 128880,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@tomprimedeals/video/7677652885966032141",
-      "status": "ok",
-      "path": "assets/video-first-frames/17-US_store_2-top_sales-7677652885966032141.jpg",
-      "bytes": 494572,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@calivira.us/video/7677715849725087006",
-      "status": "fallback_product_cover",
-      "path": "assets/video-first-frames/18-US_store_2-top_sales-7677715849725087006-fallback-product-cover.jpg",
-      "error": "<HTTPError 400: 'Bad Request'>"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@tankaneo_closet/video/7678007409524231438",
-      "status": "ok",
-      "path": "assets/video-first-frames/19-US_store_2-top_sales-7678007409524231438.jpg",
-      "bytes": 191860,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@bigtee8888/video/7678268921669094670",
-      "status": "ok",
-      "path": "assets/video-first-frames/20-US_store_2-top_sales-7678268921669094670.jpg",
-      "bytes": 607587,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@wiggy.sl/video/7678154918733122847",
-      "status": "ok",
-      "path": "assets/video-first-frames/21-US_store_2-top_sales-7678154918733122847.jpg",
-      "bytes": 494043,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@emily.scott.does.tiktok/video/7678518950535204126",
-      "status": "ok",
-      "path": "assets/video-first-frames/22-US_store_2-small_account_sales-7678518950535204126.jpg",
-      "bytes": 264353,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@smashleyl97/video/7677376340902939934",
-      "status": "ok",
-      "path": "assets/video-first-frames/23-US_store_2-small_account_sales-7677376340902939934.jpg",
-      "bytes": 178578,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@julissa_f4/video/7677692789244595486",
-      "status": "ok",
-      "path": "assets/video-first-frames/24-US_store_2-small_account_sales-7677692789244595486.jpg",
-      "bytes": 226968,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@taylorbatoria/video/7677657452791352606",
-      "status": "ok",
-      "path": "assets/video-first-frames/25-US_store_2-small_account_sales-7677657452791352606.jpg",
-      "bytes": 154768,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@geewalt1/video/7677696194302184717",
-      "status": "ok",
-      "path": "assets/video-first-frames/26-US_store_2-small_account_sales-7677696194302184717.jpg",
-      "bytes": 137413,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@lovelyyjj/video/7678064491866770719",
-      "status": "ok",
-      "path": "assets/video-first-frames/27-US_store_2-small_account_sales-7678064491866770719.jpg",
-      "bytes": 127776,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@mariamamaoftwo/video/7678321400431611167",
-      "status": "ok",
-      "path": "assets/video-first-frames/28-US_store_2-small_account_sales-7678321400431611167.jpg",
-      "bytes": 114494,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@torijflow/video/7677729265483255070",
-      "status": "ok",
-      "path": "assets/video-first-frames/29-US_store_3-top_sales-7677729265483255070.jpg",
-      "bytes": 221340,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@itsmegwilson/video/7677272747847765262",
-      "status": "ok",
-      "path": "assets/video-first-frames/30-US_store_3-top_sales-7677272747847765262.jpg",
-      "bytes": 199259,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@esmeraldastylefinds/video/7678863051004628255",
-      "status": "ok",
-      "path": "assets/video-first-frames/31-US_store_3-top_sales-7678863051004628255.jpg",
-      "bytes": 194180,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@bubba.finds/video/7678241546336029982",
-      "status": "ok",
-      "path": "assets/video-first-frames/32-US_store_3-top_sales-7678241546336029982.jpg",
-      "bytes": 305690,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@yeseniamatostelle/video/7678485917341912351",
-      "status": "ok",
-      "path": "assets/video-first-frames/33-US_store_3-top_sales-7678485917341912351.jpg",
-      "bytes": 175609,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@ttshopautumn/video/7677656565947682078",
-      "status": "ok",
-      "path": "assets/video-first-frames/34-US_store_3-top_sales-7677656565947682078.jpg",
-      "bytes": 86237,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@torijflow/video/7678044450551123231",
-      "status": "ok",
-      "path": "assets/video-first-frames/35-US_store_3-top_sales-7678044450551123231.jpg",
-      "bytes": 312189,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@schweaver5/video/7678543585490242830",
-      "status": "ok",
-      "path": "assets/video-first-frames/36-US_store_3-small_account_sales-7678543585490242830.jpg",
-      "bytes": 140474,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@mama.kay0567/video/7677633075341217054",
-      "status": "ok",
-      "path": "assets/video-first-frames/37-US_store_3-small_account_sales-7677633075341217054.jpg",
-      "bytes": 70057,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@she_is_she_will/video/7678095411806047518",
-      "status": "ok",
-      "path": "assets/video-first-frames/38-US_store_3-small_account_sales-7678095411806047518.jpg",
-      "bytes": 176724,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@july_menalb7/video/7677721872552774943",
-      "status": "ok",
-      "path": "assets/video-first-frames/39-US_store_3-small_account_sales-7677721872552774943.jpg",
-      "bytes": 255826,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@melissaannfindss/video/7677790282183740703",
-      "status": "ok",
-      "path": "assets/video-first-frames/40-US_store_3-small_account_sales-7677790282183740703.jpg",
-      "bytes": 231950,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@holisticmia/video/7678021154635877646",
-      "status": "ok",
-      "path": "assets/video-first-frames/41-US_store_3-small_account_sales-7678021154635877646.jpg",
-      "bytes": 160415,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@veryvonne/video/7677838739405606157",
-      "status": "ok",
-      "path": "assets/video-first-frames/42-US_store_3-small_account_sales-7677838739405606157.jpg",
-      "bytes": 196585,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@elsakayepatterson/video/7678692946480287008",
-      "status": "ok",
-      "path": "assets/video-first-frames/43-DE_store_1-top_sales-7678692946480287008.jpg",
-      "bytes": 82555,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@nolantestet/video/7679042837047987488",
-      "status": "ok",
-      "path": "assets/video-first-frames/44-DE_store_1-top_sales-7679042837047987488.jpg",
-      "bytes": 441024,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@stylingbyelif/video/7677471664761736481",
-      "status": "ok",
-      "path": "assets/video-first-frames/45-DE_store_1-top_sales-7677471664761736481.jpg",
-      "bytes": 85127,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@d3noo/video/7678832709204004128",
-      "status": "ok",
-      "path": "assets/video-first-frames/46-DE_store_1-top_sales-7678832709204004128.jpg",
-      "bytes": 72190,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@deno.tokai/video/7678064552407289121",
-      "status": "ok",
-      "path": "assets/video-first-frames/47-DE_store_1-top_sales-7678064552407289121.jpg",
-      "bytes": 154211,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@dejandeals/video/7678023347963219233",
-      "status": "ok",
-      "path": "assets/video-first-frames/48-DE_store_1-top_sales-7678023347963219233.jpg",
-      "bytes": 460955,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@janine__diana/video/7677282682195168544",
-      "status": "ok",
-      "path": "assets/video-first-frames/49-DE_store_1-top_sales-7677282682195168544.jpg",
-      "bytes": 193734,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@fashionista.xoo/video/7679464327044238624",
-      "status": "ok",
-      "path": "assets/video-first-frames/50-DE_store_1-small_account_sales-7679464327044238624.jpg",
-      "bytes": 59522,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@pia_und_aggi/video/7677539612419542305",
-      "status": "ok",
-      "path": "assets/video-first-frames/51-DE_store_1-small_account_sales-7677539612419542305.jpg",
-      "bytes": 314537,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@deno.tokai/video/7677415382294007072",
-      "status": "ok",
-      "path": "assets/video-first-frames/52-DE_store_1-small_account_sales-7677415382294007072.jpg",
-      "bytes": 323524,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@ms.carolinela/video/7678804250113150241",
-      "status": "ok",
-      "path": "assets/video-first-frames/53-DE_store_1-small_account_sales-7678804250113150241.jpg",
-      "bytes": 268621,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@youannnde2/video/7677958493328002326",
-      "status": "ok",
-      "path": "assets/video-first-frames/54-DE_store_1-small_account_sales-7677958493328002326.jpg",
-      "bytes": 345546,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@juliaxgram/video/7679057943593028896",
-      "status": "ok",
-      "path": "assets/video-first-frames/55-DE_store_1-small_account_sales-7679057943593028896.jpg",
-      "bytes": 75268,
-      "content_type": "image/jpeg"
-    },
-    {
-      "video_url": "https://www.tiktok.com/@kii_imi/video/7677892944736685345",
-      "status": "ok",
-      "path": "assets/video-first-frames/56-DE_store_1-small_account_sales-7677892944736685345.jpg",
-      "bytes": 195652,
-      "content_type": "image/jpeg"
+      "store_id": "DE_store_1",
+      "shop_name": "Tiktok跨境23店_DE",
+      "rows": 14,
+      "unique_skus": 14,
+      "sku_reuse_rows": 0,
+      "product_table": "D:\\Codex子不语顶级运营师\\德国店铺.xlsx",
+      "eligible_stock_positive_products": 2688
     }
-  ]
+  ],
+  "outputs": {
+    "html": "C:\\Users\\35868\\Documents\\Codex\\fastmoss-reports\\2026-08-31-four-store\\no-catalog-fill56-2026-08-31\\visual-html-report\\fastmoss-56-video-visual-report-2026-08-31.html",
+    "csv": "C:\\Users\\35868\\Documents\\Codex\\fastmoss-reports\\2026-08-31-four-store\\no-catalog-fill56-2026-08-31\\visual-html-report\\fastmoss-56-video-visual-report-data-2026-08-31.csv",
+    "xlsx": "C:\\Users\\35868\\Documents\\Codex\\fastmoss-reports\\2026-08-31-four-store\\no-catalog-fill56-2026-08-31\\four-store-56-video-report-new-rules-2026-08-31.xlsx",
+    "site_html": "C:\\Users\\35868\\Documents\\Codex\\fastmoss-weekly-report-github-clean\\reports\\2026-08-31\\index.html",
+    "site_csv": "C:\\Users\\35868\\Documents\\Codex\\fastmoss-weekly-report-github-clean\\reports\\2026-08-31\\data.csv"
+  }
 }
