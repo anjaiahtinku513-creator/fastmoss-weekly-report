@@ -20,3 +20,4 @@
 1. 生成新的可视化报告目录。
 2. 复制到 `reports/YYYY-MM-DD/`，该目录需要包含 `index.html`、`data.csv`、`visual-report-manifest.json` 和 `assets/`。
 3. 在 `reports.json` 顶部新增本周报告记录。
+4. 运行 `python scripts/render-premium-site.py` 重新生成首页和报告页的高级版静态页面。

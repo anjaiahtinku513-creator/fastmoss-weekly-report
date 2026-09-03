@@ -5,206 +5,344 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FastMoss 每周视频复刻报告</title>
   <meta name="description" content="FastMoss 每周美国和德国 TikTok 女装视频复刻报告归档。">
+  <link rel="icon" href="data:,">
   <style>
-    :root {
-      --bg: #f6f7f9;
-      --panel: #fff;
-      --ink: #172033;
-      --muted: #667085;
-      --line: #e5e7eb;
-      --hot: #f72566;
-      --green: #0f9f6e;
-      --shadow: 0 10px 28px rgba(15,23,42,.08);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Microsoft YaHei", Inter, Arial, sans-serif;
-      line-height: 1.55;
-    }
-    .shell { max-width: 1180px; margin: 0 auto; padding: 28px; }
-    header {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 24px;
-      align-items: stretch;
-      margin-bottom: 24px;
-    }
-    h1 { margin: 0 0 10px; font-size: 34px; letter-spacing: 0; }
-    .lead { color: var(--muted); margin: 0; max-width: 760px; }
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .stat {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 14px;
-    }
-    .stat b { display: block; font-size: 24px; }
-    .latest {
-      min-height: 320px;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      overflow: hidden;
-    }
-    .latest img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 8px;
-      background: #111;
-      display: block;
-    }
-    .tag {
-      display: inline-block;
-      margin: 14px 0 8px;
-      color: #c01048;
-      background: #fff1f3;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      padding: 9px 14px;
-      border-radius: 6px;
-      background: var(--ink);
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .button.secondary {
-      background: #fff;
-      color: var(--ink);
-      border: 1px solid var(--line);
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-    h2 { margin: 0 0 14px; font-size: 22px; }
-    .list { display: grid; gap: 12px; }
-    .report {
-      display: grid;
-      grid-template-columns: 120px 1fr auto;
-      gap: 14px;
-      align-items: center;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px;
-      box-shadow: var(--shadow);
-    }
-    .report img {
-      width: 120px;
-      height: 86px;
-      object-fit: cover;
-      border-radius: 6px;
-      background: #111;
-    }
-    .report h3 { margin: 0 0 4px; font-size: 18px; }
-    .report p { margin: 0; color: var(--muted); font-size: 14px; }
-    footer { color: var(--muted); font-size: 12px; margin-top: 24px; }
-    @media (max-width: 760px) {
-      .shell { padding: 16px; }
-      header { grid-template-columns: 1fr; }
-      h1 { font-size: 26px; }
-      .stats { grid-template-columns: 1fr; }
-      .report { grid-template-columns: 88px 1fr; }
-      .report img { width: 88px; height: 72px; }
-      .report .button { grid-column: 1 / -1; }
-    }
-  </style>
+:root {
+  --page: #f3f0e9;
+  --paper: #fffdf8;
+  --ink: #171717;
+  --muted: #6b6760;
+  --line: #d8d0c2;
+  --hot: #f72566;
+  --hot-dark: #b61243;
+  --teal: #087f75;
+  --amber: #b4642d;
+  --shadow: 0 24px 70px rgba(42, 34, 24, .11);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgba(23, 23, 23, .035) 1px, transparent 1px) 0 0 / 84px 84px,
+    linear-gradient(180deg, #fffaf3 0%, var(--page) 54%, #ebe6dc 100%);
+  color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", Inter, Arial, sans-serif;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+a { color: inherit; }
+.wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--ink);
+  transform: translateY(0);
+  transition: transform 760ms cubic-bezier(.76,0,.24,1);
+  pointer-events: none;
+}
+body.is-loaded .wipe { transform: translateY(-102%); }
+.shell { max-width: 1240px; margin: 0 auto; padding: 24px; }
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 820; }
+.brand-mark {
+  width: 12px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--hot), var(--amber));
+  box-shadow: 0 0 0 6px rgba(247,37,102,.08);
+}
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 39px;
+  padding: 8px 13px;
+  border-radius: 6px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 780;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.button:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(42,34,24,.14); }
+.button.ghost { background: rgba(255,253,248,.74); color: var(--ink); border-color: var(--line); }
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, .82fr);
+  gap: 22px;
+  align-items: stretch;
+}
+.panel,
+.cover,
+.archive {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,253,248,.86);
+  box-shadow: var(--shadow);
+}
+.panel {
+  position: relative;
+  overflow: hidden;
+  padding: 34px;
+  min-height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, rgba(247,37,102,.09), transparent 34%),
+    linear-gradient(150deg, transparent 55%, rgba(8,127,117,.1));
+  pointer-events: none;
+}
+.content { position: relative; z-index: 1; }
+.eyebrow {
+  margin: 0 0 13px;
+  color: var(--hot-dark);
+  font-size: 12px;
+  font-weight: 820;
+}
+h1 {
+  margin: 0;
+  max-width: 760px;
+  font-size: 46px;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+.lead {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 30px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+.stat { background: rgba(255,253,248,.92); padding: 15px; min-height: 96px; }
+.stat b { display: block; font-size: 27px; line-height: 1; }
+.stat span { display: block; margin-top: 8px; color: var(--muted); font-size: 12px; }
+.cover {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  background: #111;
+}
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.035);
+  transition: transform 1100ms cubic-bezier(.2,.8,.2,1);
+}
+body.is-loaded .cover img { transform: scale(1); }
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.22) 46%, transparent 62%);
+  transform: translateX(-120%);
+}
+body.is-loaded .cover::after { animation: sweep 1100ms 430ms cubic-bezier(.2,.8,.2,1) both; }
+.cover-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.76));
+  color: #fff;
+}
+.cover-info b { display: block; font-size: 20px; }
+.cover-info span { display: block; margin-top: 4px; color: rgba(255,255,255,.78); font-size: 13px; }
+.archive {
+  margin-top: 22px;
+  padding: 18px;
+}
+.archive-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.archive-head h2 { margin: 0; font-size: 24px; }
+.report-row {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  padding: 10px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.report-row:hover {
+  transform: translateY(-2px);
+  border-color: rgba(247,37,102,.34);
+  box-shadow: 0 16px 40px rgba(42,34,24,.12);
+}
+.report-row img {
+  width: 128px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #111;
+}
+.report-row h3 { margin: 0; font-size: 18px; line-height: 1.32; }
+.report-row p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 680ms ease, transform 680ms cubic-bezier(.2,.8,.2,1);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+footer { margin: 24px 0 8px; color: var(--muted); font-size: 12px; }
+@keyframes sweep {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(120%); }
+}
+@media (max-width: 900px) {
+  .shell { padding: 16px; }
+  .nav { align-items: flex-start; flex-direction: column; }
+  .hero { grid-template-columns: 1fr; }
+  .panel, .cover { min-height: 430px; }
+  h1 { font-size: 32px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .report-row { grid-template-columns: 96px 1fr; }
+  .report-row img { width: 96px; height: 76px; }
+  .report-row .button { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .actions, .button { width: 100%; }
+  .panel { padding: 22px; }
+  .report-row { grid-template-columns: 1fr; }
+  .report-row img { width: 100%; height: 190px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .wipe { display: none; }
+}
+</style>
 </head>
 <body>
+  <div class="wipe"></div>
   <main class="shell">
-    <header>
-      <section class="panel">
-        <h1>FastMoss 每周视频复刻报告</h1>
-        <p class="lead">面向 TikTok 女装运营的每周选题看板。每期报告按美国三店和德国一店整理 56 条可复刻视频，优先保留销量、GMV、达人、首帧图、相似可复刻 SKU、买家痛点、证明动作、原视频结构和完整双语口播证据。</p>
-        <div class="stats">
-          <div class="stat"><b id="reportCount">1</b><span>已归档周报</span></div>
-          <div class="stat"><b id="itemCount">56</b><span>最新入选视频</span></div>
-          <div class="stat"><b>4</b><span>覆盖店铺</span></div>
-        </div>
-        <div class="actions">
-          <a class="button" href="skill-packages/fastmoss-daily-video-analysis.zip">下载 Skill 安装包</a>
-          <a class="button secondary" href="https://github.com/anjaiahtinku513-creator/fastmoss-weekly-report/tree/main/skills/fastmoss-daily-video-analysis">查看 Skill 源码</a>
-          <a class="button secondary" href="reports/2026-08-31/fastmoss-56-video-report-new-rules-2026-08-31.xlsx">下载新版 Excel 报告</a>
-        </div>
-      </section>
-      <section class="panel latest" id="latestCard">
-        <img src="reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg" alt="最新报告视频首帧">
-        <div>
-          <span class="tag">最新周报</span>
-          <h2>2026-08-31 FastMoss 56 条报告</h2>
-          <p class="lead">已补每条相似可复刻 SKU，SKU 不重复；本周导出缺完整原视频口播和逐秒结构，已在报告内标明待补采。</p>
-          <p><a class="button" href="reports/2026-08-31/">打开最新报告</a></p>
-        </div>
-      </section>
+    <header class="nav">
+      <div class="brand"><span class="brand-mark"></span><span>FastMoss Weekly</span></div>
+      <nav class="actions" aria-label="站点操作">
+        <a class="button ghost" href="skill-packages/fastmoss-daily-video-analysis.zip">下载 Skill 安装包</a>
+        <a class="button ghost" href="https://github.com/anjaiahtinku513-creator/fastmoss-weekly-report/tree/main/skills/fastmoss-daily-video-analysis" target="_blank" rel="noopener">Skill 源码</a>
+        <a class="button" href="reports/2026-08-31/">打开最新报告</a>
+      </nav>
     </header>
-    <section>
-      <h2>历史报告</h2>
-      <div class="list" id="reportList">
-        <article class="report">
-          <img src="reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg" alt="2026-08-31 报告预览">
-          <div>
-            <h3>2026-08-31 FastMoss 本周四店 56 条可复刻视频报告</h3>
-            <p>56 条视频，4 个店铺，已补相似可复刻 SKU；完整源口播和逐秒结构待补采。</p>
+
+    <section class="hero">
+      <div class="panel reveal">
+        <div class="content">
+          <p class="eyebrow">FASTMOSS WEEKLY / TIKTOK WOMENSWEAR</p>
+          <h1>把每周爆款视频压缩成一张能执行的拍摄清单。</h1>
+          <p class="lead">站点按周归档美国三店与德国一店的 FastMoss 视频复刻报告。最新版本保留首帧、销量、GMV、达人粉丝、店铺 SKU、买家痛点和证明动作，长结构进入详情页阅读。</p>
+          <div class="actions" style="margin-top:24px">
+            <a class="button" href="reports/2026-08-31/">进入最新周报</a>
+            <a class="button ghost" href="reports/2026-08-31/fastmoss-56-video-report-new-rules-2026-08-31.xlsx">下载 Excel</a>
           </div>
-          <a class="button" href="reports/2026-08-31/">查看</a>
-        </article>
+        </div>
+        <div class="stats" aria-label="归档统计">
+          <div class="stat"><b data-report-count>1</b><span>已归档周报</span></div>
+          <div class="stat"><b data-item-count>56</b><span>最新入选视频</span></div>
+          <div class="stat"><b data-store-count>4</b><span>覆盖店铺</span></div>
+          <div class="stat"><b>$684.9K</b><span>样本 GMV</span></div>
+        </div>
       </div>
+      <aside class="cover reveal">
+        <img src="reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg" alt="最新报告视频首帧">
+        <div class="cover-info">
+          <b>2026-08-31 最新周报</b>
+          <span>已补每条相似可复刻 SKU，SKU 不重复；本周导出缺完整原视频口播和逐秒结构，已在报告内标明待补采。</span>
+        </div>
+      </aside>
     </section>
-    <footer>仅展示公开来源报告素材。每周更新时新增日期目录并刷新 reports.json。</footer>
+
+    <section class="archive reveal">
+      <div class="archive-head">
+        <div>
+          <p class="eyebrow">REPORT ARCHIVE</p>
+          <h2>历史报告</h2>
+        </div>
+        <a class="button ghost" href="https://github.com/anjaiahtinku513-creator/fastmoss-weekly-report" target="_blank" rel="noopener">打开仓库</a>
+      </div>
+      <article class="report-row">
+        <img src="reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg" alt="2026-08-31 报告预览">
+        <div>
+          <h3>2026-08-31 FastMoss 本周四店 56 条可复刻视频报告｜新规则版</h3>
+          <p>56 条视频，4 个店铺，16.2K 样本销量。已补每条相似可复刻 SKU，SKU 不重复；本周导出缺完整原视频口播和逐秒结构，已在报告内标明待补采。</p>
+        </div>
+        <a class="button" href="reports/2026-08-31/">查看</a>
+      </article>
+    </section>
+
+    <footer>GitHub Pages 静态发布。每周更新时新增日期目录并刷新 reports.json。</footer>
   </main>
+  <script id="latest-report" type="application/json">{"date": "2026-08-31", "title": "FastMoss 本周四店 56 条可复刻视频报告｜新规则版", "notes": "已补每条相似可复刻 SKU，SKU 不重复；本周导出缺完整原视频口播和逐秒结构，已在报告内标明待补采。", "path": "reports/2026-08-31/", "thumbnail": "reports/2026-08-31/assets/video-first-frames/01-US_store_1-top_sales-7678205266227154207.jpg", "items": 56, "stores": 4, "sales": "16.2K", "gmv": "$684.9K"}</script>
   <script>
-    fetch('reports.json')
-      .then((response) => response.ok ? response.json() : null)
-      .then((data) => {
-        if (!data || !Array.isArray(data.reports) || data.reports.length === 0) return;
-        const reports = data.reports.slice().sort((a, b) => b.date.localeCompare(a.date));
-        const latest = reports[0];
-        document.getElementById('reportCount').textContent = reports.length;
-        document.getElementById('itemCount').textContent = latest.items || 0;
-        document.getElementById('latestCard').innerHTML = `
-          <img src="${latest.thumbnail}" alt="最新报告视频首帧">
-          <div>
-            <span class="tag">最新周报</span>
-            <h2>${latest.date} ${latest.title}</h2>
-            <p class="lead">${latest.notes || ''}</p>
-            <p><a class="button" href="${latest.path}">打开最新报告</a></p>
-          </div>`;
-        document.getElementById('reportList').innerHTML = reports.map((report) => `
-          <article class="report">
-            <img src="${report.thumbnail}" alt="${report.date} 报告预览">
-            <div>
-              <h3>${report.date} ${report.title}</h3>
-              <p>${report.items || 0} 条视频，${report.stores || 4} 个店铺。${report.notes || ''}</p>
-            </div>
-            <a class="button" href="${report.path}">查看</a>
-          </article>`).join('');
-      })
-      .catch(() => {});
-  </script>
+const latest = JSON.parse(document.getElementById("latest-report").textContent);
+
+function setupReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .08 });
+  document.querySelectorAll(".reveal").forEach((element, index) => {
+    element.style.transitionDelay = `${Math.min(index, 5) * 54}ms`;
+    observer.observe(element);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("reports.json")
+    .then((response) => response.ok ? response.json() : null)
+    .then((data) => {
+      if (!data || !Array.isArray(data.reports) || data.reports.length === 0) return;
+      const report = data.reports.slice().sort((a, b) => b.date.localeCompare(a.date))[0];
+      document.querySelector("[data-report-count]").textContent = data.reports.length;
+      document.querySelector("[data-item-count]").textContent = report.items || latest.items;
+      document.querySelector("[data-store-count]").textContent = report.stores || latest.stores;
+    })
+    .catch(() => {});
+  setupReveal();
+  requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+});
+</script>
 </body>
 </html>
